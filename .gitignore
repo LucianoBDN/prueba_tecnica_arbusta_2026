@@ -1,0 +1,25 @@
+# Entornos virtuales
+venv/
+.env/
+.env.*
+
+# Cache de Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Cache de herramientas
+.cache/
+.ipynb_checkpoints/
+
+# HuggingFace / Transformers
+.cache/huggingface/
+models/
+*.bin
+
+
+
+
+
+
+
