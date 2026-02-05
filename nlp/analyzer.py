@@ -2,7 +2,7 @@ import torch
 import numpy as np
 from scipy.special import softmax
 
-from model import tokenizer, model, config
+from nlp.model import tokenizer, model, config
 
 
 def analyze_text(text: str) -> dict:
@@ -38,5 +38,3 @@ def analyze_text(text: str) -> dict:
         "sentiment": config.id2label[max_index],
         "score": float(scores[max_index])
     }
-
-print(analyze_text("Tremendo sos un tipazo segui asi que vas bien"))

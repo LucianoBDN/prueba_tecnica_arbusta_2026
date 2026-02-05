@@ -2,21 +2,22 @@ Dependencias del proyecto
 
 Python: versión 3.9 o superior
 
-Las siguientes librerías deben instalarse mediante pip:
+Las siguientes librerías deben instalarse a través de pip:
+
+fastapi
+Framework para la creación de la API REST.
+
+uvicorn
+Servidor ASGI para ejecutar la API.
 
 transformers
-
-Librería de Natural Language Processing utilizada para cargar el modelo de análisis de sentimiento y su tokenizer de forma explícita.
+Librería de NLP utilizada para el análisis de sentimiento.
 
 torch
-
-Backend requerido para la ejecución del modelo Transformer (PyTorch).
+Backend requerido para ejecutar el modelo de NLP.
 
 pandas
+Lectura y manejo del archivo reviews.csv.
 
-Librería utilizada para la lectura y procesamiento del archivo reviews.csv.
-
-sentencepiece
-
-Dependencia necesaria para el funcionamiento del tokenizer del modelo
-cardiffnlp/twitter-xlm-roberta-base-sentiment.
+tiktoken
+Dependencia requerida por transformers para el manejo de tokenizadores en algunos modelos preentrenados.
