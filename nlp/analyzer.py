@@ -1,8 +1,10 @@
 import torch
 import numpy as np
 from scipy.special import softmax
-
+import pandas as pd
 from nlp.model import tokenizer, model, config
+from utils.file_validation import validate_csv_structure, validate_file_path, normalize_columns
+
 
 
 def analyze_text(text: str) -> dict:
@@ -38,3 +40,32 @@ def analyze_text(text: str) -> dict:
         "sentiment": config.id2label[max_index],
         "score": float(scores[max_index])
     }
+
+
+
+import pandas as pd
+from nlp.analyzer import analyze_text
+
+def analizeCSV(path: str) -> list[dict]:
+    validate_file_path(path)
+
+    df = pd.read_csv(path)
+    df = normalize_columns(df)
+
+    validate_csv_structure(df, {"id", "message"})
+
+    results = []
+
+    for _, row in df.iterrows():
+        analysis = analyze_text(row["message"])
+        results.append({
+            "id": row["id"],
+            "message": row["message"],
+            "sentiment": analysis["sentiment"],
+            "score": analysis["score"]
+        })
+
+    return results
+
+
+

@@ -21,3 +21,5 @@ Lectura y manejo del archivo reviews.csv.
 
 tiktoken
 Dependencia requerida por transformers para el manejo de tokenizadores en algunos modelos preentrenados.
+
+Iniciar backen: uvicorn api.main:app --reload
