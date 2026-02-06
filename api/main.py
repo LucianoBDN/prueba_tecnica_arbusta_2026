@@ -18,6 +18,6 @@ async def api_analize(data: AnalyzeRequest):
 @app.get("/analyze-csv")
 async def api_analize_csv():
     try:
-        return analizeCSV(r"C:/Users/Luciano/Desktop/prueba_tecnica_arbusta_bordon_luciano\data/reviews.csv")
+        return analizeCSV(r"./data/reviews.csv")
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
