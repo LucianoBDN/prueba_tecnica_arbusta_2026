@@ -42,11 +42,32 @@ def analyze_text(text: str) -> dict:
     }
 
 
-
-import pandas as pd
-from nlp.analyzer import analyze_text
-
 def analizeCSV(path: str) -> list[dict]:
+    """
+    Analiza los sentimientos de los mensajes en un archivo CSV.
+
+    Esta función toma un archivo CSV que contiene mensajes y realiza una serie de operaciones:
+    1. Valida la ruta del archivo.
+    2. Lee el archivo CSV en un DataFrame.
+    3. Normaliza los nombres de las columnas del DataFrame.
+    4. Verifica que el DataFrame contenga las columnas necesarias: 'id' y 'message'.
+    5. Analiza el sentimiento de cada mensaje utilizando un modelo preentrenado.
+    6. Devuelve una lista de diccionarios con el 'id', 'message', 'sentiment' y 'score' para cada mensaje.
+
+    Args:
+        path (str): La ruta del archivo CSV que contiene los mensajes a analizar.
+
+    Returns:
+        list[dict]: Una lista de diccionarios, donde cada diccionario contiene:
+            - 'id': El identificador del mensaje.
+            - 'message': El texto del mensaje.
+            - 'sentiment': El sentimiento predicho para el mensaje.
+            - 'score': La puntuación del sentimiento.
+
+    Raises:
+        ValueError: Si el archivo CSV tiene una estructura incorrecta o faltan columnas requeridas.
+        FileNotFoundError: Si el archivo no existe en la ruta especificada.
+    """
     validate_file_path(path)
 
     df = pd.read_csv(path)

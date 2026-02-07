@@ -23,7 +23,7 @@ async def api_analize_csv():
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
     
-@app.post("/analyze-csv",
+@app.post("/analyze-csv-upload",
     summary="Analiza un archivo CSV con múltiples textos",
     description=(
         "Recibe un archivo CSV con una columna `message` y devuelve, "
