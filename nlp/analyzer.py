@@ -67,7 +67,7 @@ def analizeCSV(path: str) -> list[dict]:
     Raises:
         ValueError: Si el archivo CSV tiene una estructura incorrecta o faltan columnas requeridas.
         FileNotFoundError: Si el archivo no existe en la ruta especificada.
-    """
+    """ 
     validate_file_path(path)
 
     df = pd.read_csv(path)

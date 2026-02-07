@@ -6,3 +6,5 @@ pandas
 sentencepiece
 scipy
 numpy
+pydantic
+python-multipart
