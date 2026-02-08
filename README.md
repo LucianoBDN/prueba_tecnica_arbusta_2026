@@ -70,3 +70,97 @@ La API quedará disponible en:
 ```
 http://127.0.0.1:8000
 ```
+
+
+# API de Análisis de Sentimiento
+
+Este proyecto consiste en una API backend para análisis de sentimiento utilizando un modelo Transformer preentrenado y un frontend simple para facilitar las pruebas de la aplicación.
+
+La API permite:
+- Analizar el sentimiento de un texto individual
+- Analizar múltiples textos a partir de un archivo CSV, con resultados paginados
+
+---
+
+## Extra: Frontend para pruebas
+
+Como complemento al backend, desarrollé **un frontend simple** para poder probar la API de manera más cómoda y visual, sin depender únicamente de herramientas como Postman o Swagger.
+
+Este frontend **no era un requisito**, pero lo agregué como extra para:
+- Facilitar la validación del funcionamiento de la API
+- Visualizar mejor los resultados
+- Simular un posible uso real de la aplicación
+
+---
+
+##  Frontend
+
+- Framework: **Angular**
+- Propósito: interfaz de prueba para consumir los endpoints del backend
+- Comunicación con el backend mediante HTTP (REST)
+
+### Funcionalidades del frontend
+
+- ✅ Análisis de texto individual
+- ✅ Carga de archivo CSV
+- ✅ Visualización de resultados en cards
+- ✅ Paginación de resultados del CSV
+
+---
+
+## Análisis de Texto
+
+### Sin resultado (estado inicial)
+
+Pantalla inicial donde el usuario puede ingresar un texto para analizar:
+
+![Analyze Text - Sin resultado](./data/img/analyzeText.png)
+
+### Con resultado
+
+Luego de enviar el texto, se muestra:
+- Sentimiento detectado
+- Score de confianza
+
+![Analyze Text - Con resultado](./data/img/analyzeTextResult.png)
+
+---
+
+##  Análisis de CSV
+
+### Sin resultado (estado inicial)
+
+Pantalla para cargar un archivo CSV con múltiples mensajes:
+
+![Analyze CSV - Sin resultado](./data/img/analyzecsv.png)
+
+### Con resultado
+
+Luego de subir el archivo:
+- Se muestran los resultados paginados
+- Cada registro se presenta en una card con su análisis
+
+![Analyze CSV - Con resultado](./data/img/analyzeCsvResults.png)
+
+---
+
+## Estructura general del proyecto
+
+- `api/` → Rutas de FastAPI
+- `nlp/` → Lógica de análisis de sentimiento
+- `utils/` → Validaciones de archivos y CSV
+- `data/` → Archivos CSV de ejemplo
+- `frontend/` → Aplicación Angular para pruebas
+
+---
+
+## Notas
+
+- El frontend está pensado únicamente como herramienta de prueba y demostración.
+- El backend puede utilizarse de forma independiente mediante HTTP.
+- El análisis de CSV se realiza utilizando archivos temporales y los resultados se devuelven de forma paginada para evitar sobrecargar la respuesta.
+
+---
+
+## Link al repositorio del Frontend: 
+    https://github.com/LucianoBDN/Smart_Feedback_App_Frontend
