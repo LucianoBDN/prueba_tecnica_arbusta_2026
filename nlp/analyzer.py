@@ -42,7 +42,7 @@ def analyze_text(text: str) -> dict:
     }
 
 
-def analizeCSV(path: str) -> list[dict]:
+def analizeCSV(path: str, page: int = 1, page_size: int =10) -> dict:
     """
     Analiza los sentimientos de los mensajes en un archivo CSV.
 
@@ -51,18 +51,27 @@ def analizeCSV(path: str) -> list[dict]:
     2. Lee el archivo CSV en un DataFrame.
     3. Normaliza los nombres de las columnas del DataFrame.
     4. Verifica que el DataFrame contenga las columnas necesarias: 'id' y 'message'.
-    5. Analiza el sentimiento de cada mensaje utilizando un modelo preentrenado.
-    6. Devuelve una lista de diccionarios con el 'id', 'message', 'sentiment' y 'score' para cada mensaje.
+    5. Aplica paginación sobre los registros.
+    6. Analiza el sentimiento SOLO de los mensajes de la página solicitada.
+    7. Devuelve los resultados junto con metadata de paginación.
 
     Args:
         path (str): La ruta del archivo CSV que contiene los mensajes a analizar.
-
+        page (int, optional): Número de página a devolver (base 1).
+            Default = 1.
+        page_size (int, optional): Cantidad de registros por página.
+            Default = 10.
     Returns:
-        list[dict]: Una lista de diccionarios, donde cada diccionario contiene:
-            - 'id': El identificador del mensaje.
-            - 'message': El texto del mensaje.
-            - 'sentiment': El sentimiento predicho para el mensaje.
-            - 'score': La puntuación del sentimiento.
+        dict: Objeto con metadata de paginación y resultados:
+            - page (int): Página actual.
+            - page_size (int): Cantidad de registros por página.
+            - total_items (int): Total de registros en el CSV.
+            - total_pages (int): Total de páginas disponibles.
+            - data (list[dict]): Lista de resultados de sentimiento:
+                - id: Identificador del mensaje.
+                - message: Texto analizado.
+                - sentiment: Sentimiento predicho.
+                - score: Confianza de la predicción.
 
     Raises:
         ValueError: Si el archivo CSV tiene una estructura incorrecta o faltan columnas requeridas.
@@ -74,10 +83,19 @@ def analizeCSV(path: str) -> list[dict]:
     df = normalize_columns(df)
 
     validate_csv_structure(df, {"id", "message"})
+    
+    total = len(df)
+
+    
+    start = (page - 1) * page_size
+    end = start + page_size
+
+    
+    page_df = df.iloc[start:end]
 
     results = []
 
-    for _, row in df.iterrows():
+    for _, row in page_df.iterrows():
         analysis = analyze_text(row["message"])
         results.append({
             "id": row["id"],
@@ -86,7 +104,13 @@ def analizeCSV(path: str) -> list[dict]:
             "score": analysis["score"]
         })
 
-    return results
+    return {
+        "page": page,
+        "page_size": page_size,
+        "total_items": total,
+        "total_pages": (total + page_size - 1) // page_size,
+        "data": results
+    }
 
 
 

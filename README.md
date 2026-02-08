@@ -24,6 +24,7 @@ Esto para mantener el código más limpio y organizado.
 ### Uso de CSV como formato de entrada
 
 Originalmente, el archivo reviews.csv que se me proporcionó parecía tener un propósito meramente ilustrativo. Por esta razón, decidí implementar una ruta que permita la carga de archivos CSV con múltiples mensajes para análisis. Esta decisión mejora la funcionalidad de la aplicación, ya que no solo permite analizar un mensaje aislado, sino que también facilita el análisis de múltiples mensajes a la vez, haciendo la aplicación más robusta y escalable.
+La ruta devuelve los datos paginados junto con la cantidad de paginas y la cantidad de datos totales utilizando guardado de archivos temporales.
 
 ---
 
